@@ -1,4 +1,5 @@
 """/config command."""
+import json
 
 from telegram import Update
 from telegram.ext import CallbackContext
@@ -31,7 +32,7 @@ class ConfigCommand:
         parts = message.text.split()
         if len(parts) == 1:
             # /config without arguments
-            await message.reply_text(HELP_MESSAGE, parse_mode=ParseMode.HTML)
+            await message.reply_text(json.dumps(config.as_dict(), indent=4), parse_mode=ParseMode.HTML)
             return
 
         property = parts[1]
